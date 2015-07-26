@@ -50,7 +50,7 @@ public class OtsuBinarize {
         int alpha, red, green, blue;
         int newPixel;
  
-        BufferedImage grayImage = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
+        BufferedImage greyImage = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
  
         for(int i=0; i<original.getWidth(); i++) {
             for(int j=0; j<original.getHeight(); j++) {
@@ -61,17 +61,17 @@ public class OtsuBinarize {
                 green = new Color(original.getRGB(i, j)).getGreen();
                 blue = new Color(original.getRGB(i, j)).getBlue();
  
-                int gray = (int) (0.2126 * red + 0.7152 * green + 0.0722 * blue);
+                int grey = (int) (0.2126 * red + 0.7152 * green + 0.0722 * blue);
                 // Return back to original format
-                newPixel = colorToRGB(alpha, gray, gray, gray);
+                newPixel = colorToRGB(alpha, grey, grey, grey);
  
                 // Write pixels into image
-                grayImage.setRGB(i, j, newPixel);
+                greyImage.setRGB(i, j, newPixel);
  
             }
         }
  
-        return grayImage;
+        return greyImage;
     }
  
     // Get binary treshold using Otsu's method
