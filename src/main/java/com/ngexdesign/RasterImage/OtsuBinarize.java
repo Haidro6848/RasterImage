@@ -31,10 +31,13 @@ public class OtsuBinarize {
  
         int[] histogram = new int[256];
  
-        for(int i=0; i<histogram.length; i++) histogram[i] = 0;
+        for (int i=0; i<histogram.length; i++) 
+        	histogram[i] = 0;
  
-        for(int i=0; i<input.getWidth(); i++) {
-            for(int j=0; j<input.getHeight(); j++) {
+        for (int i=0; i<input.getWidth(); i++) 
+        {
+            for (int j=0; j<input.getHeight(); j++) 
+            {
                 int red = new Color(input.getRGB (i, j)).getRed();
                 histogram[red]++;
             }
@@ -52,9 +55,10 @@ public class OtsuBinarize {
  
         BufferedImage greyImage = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
  
-        for(int i=0; i<original.getWidth(); i++) {
-            for(int j=0; j<original.getHeight(); j++) {
- 
+        for(int i=0; i<original.getWidth(); i++) 
+        {
+            for(int j=0; j<original.getHeight(); j++) 
+            {
                 // Get pixels by R, G, B
                 alpha = new Color(original.getRGB(i, j)).getAlpha();
                 red = new Color(original.getRGB(i, j)).getRed();
@@ -112,7 +116,8 @@ public class OtsuBinarize {
         return threshold;
  
     }
-//    public static byte[][] binarizeImage(BufferedImage bfImage){
+    
+/*    public static byte[][] binarizeImage(BufferedImage bfImage){
 //        final int THRESHOLD = 160;
 //        int height = bfImage.getHeight();
 //        int width = bfImage.getWidth();
@@ -132,20 +137,28 @@ public class OtsuBinarize {
 //            }
 //        }
 //        return image;
-//    }
-    public static void print(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+      }*/
+    
+    public static void print(int[][] matrix) 
+    {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) 
+        {
             return;
         }
         System.out.println();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] == 1) {
+        for (int i = 0; i < matrix.length; i++) 
+        {
+            for (int j = 0; j < matrix[0].length; j++) 
+            {
+                if (matrix[i][j] == 1) 
+                {
                     System.out.print("1 ");
-                } else if (matrix[i][j] == 0) {
+                } else if (matrix[i][j] == 0) 
+                {
                     System.out.print("  ");
                 }
-                else{
+                else
+                {
                 	System.out.print("C ");
                 }
             }
@@ -153,6 +166,7 @@ public class OtsuBinarize {
         }
         System.out.println();
     }
+    
     private static BufferedImage binarize(BufferedImage original) {
  
         int newPixel;
@@ -161,9 +175,10 @@ public class OtsuBinarize {
  
         BufferedImage binarized = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
         int[][] image = new int[original.getHeight()][original.getWidth()];
-        for(int i=0; i<original.getWidth(); i++) {
-            for(int j=0; j<original.getHeight(); j++) {
- 
+        for(int i=0; i<original.getWidth(); i++) 
+        {
+            for(int j=0; j<original.getHeight(); j++) 
+            {
                 // Get pixels
             	Color c = new Color(original.getRGB(i,j));
                 int red = c.getRed();
@@ -171,11 +186,13 @@ public class OtsuBinarize {
                 int blue = c.getBlue();
                 int alpha = c.getAlpha();
                 alpha = 255;
-                if(red > threshold) {
+                if(red > threshold) 
+                {
                     newPixel = 255;
                     image[j][i] = 0;
                 }
-                else {
+                else 
+                {
                     newPixel = 0;
                     image[j][i] = 1;
                 }
