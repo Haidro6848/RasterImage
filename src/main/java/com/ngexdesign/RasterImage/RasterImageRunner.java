@@ -20,6 +20,8 @@ public class RasterImageRunner {
 	
 	static Timer timer;
 	
+	public int c = 0;
+	
 	public RasterImageRunner()
 	{
 		this.createGUI();
@@ -42,25 +44,23 @@ public class RasterImageRunner {
 		mPanel.add(mLabel);
 		
 		mFrame.add(mPanel);
-	}
-
-	public static void main(String[] args) 
-	{
-		new RasterImageRunner();
 		
 		timer = new Timer(50, new RasterTimer());
 	    timer.start();
 	}
 
-}
-
-class RasterTimer implements ActionListener 
-{
-	public void actionPerformed(ActionEvent e) 
+	public static void main(String[] args) 
 	{
-		int i = 0;
-		System.out.println(i + "asdf");
-		i++;
+		new RasterImageRunner();
 	}
-}
+	
+	private class RasterTimer implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.out.println(c + " asdf");
+			c++;
+		}
+	}
 
+}
