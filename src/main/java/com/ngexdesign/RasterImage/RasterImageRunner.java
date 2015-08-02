@@ -17,7 +17,7 @@ public class RasterImageRunner extends JPanel
 
 	public static Timer timer;
 
-	public int c = 0;
+	public int boundaryX = 0;
 
 	public RasterImageRunner ()
 	{
@@ -32,13 +32,8 @@ public class RasterImageRunner extends JPanel
 			//Not handled.
 		}
 
-		timer = new Timer(50, new RasterTimer());
+		timer = new Timer(20, new RasterTimer());
 		timer.start();
-	}
-	
-	public void actionPerformed(ActionEvent ae) 
-	{
-		System.out.println("One");
 	}
 
 	public void paintComponent(Graphics g) 
@@ -49,6 +44,7 @@ public class RasterImageRunner extends JPanel
 
 	public static void main(String [] args)
 	{
+		
 		JFrame f = new JFrame("Window");
 		f.getContentPane().add(new RasterImageRunner());
 		f.setSize(460, 470);
@@ -106,12 +102,12 @@ public class RasterImageRunner extends JPanel
 			{
 				for (int j=0; j<H1-200; j++)
 				{
-					writeRaster2.setPixel(c, j, pixels1);
+					writeRaster2.setPixel(boundaryX, j, pixels1);
 				}
 			}
 
 			finalImage1 = new BufferedImage(ColorModel.getRGBdefault(), writeRaster2, false, null);
-			c++;
+			boundaryX++;
 		}
 	}
 }
