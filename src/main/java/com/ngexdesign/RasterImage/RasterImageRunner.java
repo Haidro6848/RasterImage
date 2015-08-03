@@ -23,6 +23,9 @@ public class RasterImageRunner extends JPanel
 	private BufferedImage image;
 	private RasterImage rasterImage;
 	
+	private int direction = 1;
+	private int speed = 20;
+	
 	public RasterImageRunner ()
 	{
 		rasterImage = new RasterImage(width, height);
@@ -48,8 +51,18 @@ public class RasterImageRunner extends JPanel
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
+			if(boundaryX <= 0)
+			{
+				boundaryX = 1;
+				direction = 1;
+			}
+			else if(boundaryX >= width)
+			{
+				boundaryX = width - 1;
+				direction = -1;
+			}
 			image = rasterImage.generateMagicImage(SwipeType.HORIZONTAL, boundaryX);
-			boundaryX++;
+			boundaryX += direction * speed;
 		}
 	}
 }
