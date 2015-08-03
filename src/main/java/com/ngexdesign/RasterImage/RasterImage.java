@@ -71,7 +71,9 @@ public class RasterImage
 			SinglePixelPackedSampleModel sampleModel2 = new SinglePixelPackedSampleModel(DataBuffer.TYPE_INT, boundary, bImage1.getHeight(), bitMask);
 			WritableRaster writeRaster2 = Raster.createWritableRaster(sampleModel2, buffer2, null);
 			
-			writeRaster.setPixels(0, 0, boundary, bImage2.getHeight(), sampleModel2.getPixels(0, 0, boundary, bImage2.getHeight(), pixels2, buffer2));
+			int pixels3[] = new int[4*boundary * bImage2.getHeight()];
+			writeRaster2.getPixels(0, 0, boundary, bImage2.getHeight(), pixels3);
+			writeRaster.setPixels(0, 0, boundary, bImage2.getHeight(), pixels3);
 			
 			finalImage1 = new BufferedImage(ColorModel.getRGBdefault(), writeRaster, false, null);
 			return finalImage1;
