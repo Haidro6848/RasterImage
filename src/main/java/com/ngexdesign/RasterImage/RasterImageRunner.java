@@ -17,19 +17,20 @@ public class RasterImageRunner extends JPanel
 {
 	private static int width = 472;
 	private static int height = 408;
-	
+
 	private Timer timer;
 	private int boundaryX = 1;
 	private BufferedImage image;
 	private RasterImage rasterImage;
-	
+
 	private int direction = 1;
-	private int speed = 20;
-	
+	private int speed = 5;
+	private double angle = 0.0;
+
 	public RasterImageRunner ()
 	{
 		rasterImage = new RasterImage(width, height);
-		timer = new Timer(20, new RasterTimer());
+		timer = new Timer(20, new RasterTimer(SwipeType.SWEEP));
 		timer.start();
 	}
 
@@ -49,20 +50,45 @@ public class RasterImageRunner extends JPanel
 	
 	private class RasterTimer implements ActionListener 
 	{
+		private SwipeType type;
+		
+		public RasterTimer(SwipeType type)
+		{
+			this.type = type;
+		}
+		
 		public void actionPerformed(ActionEvent e) 
 		{
-			if(boundaryX <= 0)
+			if(type == SwipeType.HORIZONTAL || type == SwipeType.VERTICAL)
 			{
-				boundaryX = 1;
-				direction = 1;
+				if (boundaryX <= 0)
+				{
+					boundaryX = 1;
+					direction = 1;
+				}
+				else if (boundaryX >= width)
+				{
+					boundaryX = width - 1;
+					direction = -1;
+				}
+				image = rasterImage.generateMagicImage(SwipeType.HORIZONTAL, boundaryX);
+				boundaryX += direction * speed;
 			}
-			else if(boundaryX >= width)
+			else if (type == SwipeType.SWEEP)
 			{
-				boundaryX = width - 1;
-				direction = -1;
+				if (angle <= 0)
+				{
+					angle = 0.0;
+					direction = 1;
+				}
+				else if (angle > Math.PI)
+				{
+					angle = Math.PI;
+					direction = -1;
+				}
+				image = rasterImage.generateMagicImage(SwipeType.SWEEP, angle);
+				angle += direction * speed * Math.PI/180;
 			}
-			image = rasterImage.generateMagicImage(SwipeType.HORIZONTAL, boundaryX);
-			boundaryX += direction * speed;
 		}
 	}
 }
